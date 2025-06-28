@@ -27,3 +27,7 @@ kotlin-js-store
 
 # Kotlin ignores
 .kotlin
+/.idea/.gitignore
+/.idea/vcs.xml
+/.idea/.name
+/.idea/misc.xml
