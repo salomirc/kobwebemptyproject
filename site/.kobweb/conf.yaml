@@ -1,0 +1,14 @@
+site:
+  title: "KobWebEmptyProject"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/kotlin-webpack/js/developmentExecutable/kobwebemptyproject.js"
+      api: "build/libs/kobwebemptyproject.jar"
+    prod:
+      script: "build/kotlin-webpack/js/productionExecutable/kobwebemptyproject.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080
