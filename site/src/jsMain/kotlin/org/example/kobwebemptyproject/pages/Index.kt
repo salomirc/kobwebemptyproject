@@ -1,102 +1,66 @@
 package org.example.kobwebemptyproject.pages
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.color
+import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.silk.components.icons.MoonIcon
+import com.varabyte.kobweb.silk.components.icons.SunIcon
+import org.example.kobwebemptyproject.components.IconButton
+import org.example.kobwebemptyproject.components.NumberBox
 import org.jetbrains.compose.web.css.*
-import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
-import org.jetbrains.compose.web.dom.Text
 
 @Page
 @Composable
 fun HomePage() {
     var isDarkMode by remember { mutableStateOf(false) }
-    // TODO: Replace the following with your own content
     Div(attrs = {
-            style {
-                padding(64.px)
-                display(DisplayStyle.Flex)
-                flexWrap(FlexWrap.Wrap)
-                backgroundColor(if (isDarkMode) Color.black else Color.white)
-            }
+        id("container")
+        style {
+            backgroundColor(if (isDarkMode) Color.black else Color.white)
+        }
     }) {
         Div(attrs = {
+            id("header")
             style {
                 width(100.percent)
+                padding(20.px)
                 textAlign("right")
             }
         }) {
-            RegularButton(
-                text = if (isDarkMode) "LightMode" else "DarkMode",
-                isDarkMode = isDarkMode,
+            IconButton(
                 onClick = {
                     isDarkMode = !isDarkMode
+                },
+                backgroundColor = Color.transparent,
+                content = {
+                    if (isDarkMode) {
+                        SunIcon(modifier = Modifier
+                            .color(Color.white)
+                            .padding(top = 8.px)
+                        )
+                    } else {
+                        MoonIcon(modifier = Modifier
+                            .color(Color.black)
+                            .padding(top = 8.px)
+                        )
+                    }
                 }
             )
         }
-        repeat(100) { index ->
-            NumberBox("$index")
+        Div(attrs = {
+            id("content")
+            style {
+                padding(10.px)
+                display(DisplayStyle.Flex)
+                flexWrap(FlexWrap.Wrap)
+            }
+        }) {
+            repeat(100) { index ->
+                NumberBox("$index")
+            }
         }
     }
-}
-
-
-@Composable
-fun NumberBox(text: String) {
-    Div(attrs = {
-        style {
-            backgroundColor(Color.yellow)
-            width(100.px)
-            margin(10.px)
-            textAlign("center")
-            lineHeight(75.px)
-            fontSize(30.px)
-        }
-    }) {
-        Text(text)
-    }
-}
-
-@Composable
-fun RegularButton(
-    text: String,
-    isDarkMode: Boolean,
-    onClick: () -> Unit
-) {
-    Button(attrs ={
-        onClick {
-            onClick()
-        }
-        style {
-            backgroundColor(Color.dodgerblue)
-            color(if (isDarkMode) Color.white else Color.black)
-            borderWidth(0.px)
-            width(100.px)
-            height(100.px)
-        }
-    }) {
-        Text(text)
-    }
-}
-
-
-
-@Page("/preview/numberBox")
-@Composable
-fun numberBoxPreview() {
-    NumberBox("1")
-}
-
-@Page("/preview/regularButton")
-@Composable
-fun regularButtonPreview() {
-    RegularButton(
-        text = "Click me!",
-        isDarkMode = true,
-        onClick = {}
-    )
 }
