@@ -1,16 +1,21 @@
 package org.example.kobwebemptyproject.components
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.example.kobwebemptyproject.toSitePalette
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun NumberBox(text: String) {
+fun NumberBox(
+    text: String
+) {
+    val sitePalette = ColorMode.current.toSitePalette()
     Div(attrs = {
         style {
-            backgroundColor(Color.yellow)
+            backgroundColor(sitePalette.surfaceVariant)
             width(100.px)
             margin(10.px)
             textAlign("center")

@@ -6,32 +6,21 @@ import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.kobwebemptyproject.components.NumberBox
 import org.example.kobwebemptyproject.sections.Header
-import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.H5
+import org.jetbrains.compose.web.dom.Text
 
 @Page
 @Composable
-fun HomePage(ctx: PageContext) {
+fun AboutPage(ctx: PageContext) {
     var colorMode by ColorMode.currentState
     Div(attrs = {
         id("container")
     }) {
         Header()
-        Div(attrs = {
-            id("content")
-            style {
-                padding(10.px)
-                display(DisplayStyle.Flex)
-                flexWrap(FlexWrap.Wrap)
-            }
-        }) {
-            repeat(100) { index ->
-                NumberBox(
-                    text = "$index"
-                )
-            }
+        H5 {
+            Text("About Page Title")
         }
     }
 }

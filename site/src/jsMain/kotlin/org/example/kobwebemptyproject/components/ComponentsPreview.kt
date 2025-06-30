@@ -49,7 +49,9 @@ fun NumberBoxPreview() {
     PreviewWrapper(
         padding = arrayOf(10.px, 0.px, 0.px, 0.px)
     ) {
-        NumberBox("1")
+        NumberBox(
+            "1"
+        )
     }
 }
 
