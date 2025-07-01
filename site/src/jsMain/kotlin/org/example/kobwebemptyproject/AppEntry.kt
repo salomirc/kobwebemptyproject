@@ -38,13 +38,14 @@ fun initStyles(ctx: InitSilkContext) {
 @App
 @Composable
 fun AppEntry(content: @Composable () -> Unit) {
-    AppStyles.siteStyleSheet = SiteStyleSheet(ColorMode.current.toSitePalette())
-    Style(AppStyles.siteStyleSheet)
     SilkApp {
         val colorMode = ColorMode.current
         LaunchedEffect(colorMode) {
             colorMode.saveToLocalStorage(COLOR_MODE_KEY)
         }
+
+        AppStyles.siteStyleSheet = SiteStyleSheet(colorMode.toSitePalette())
+        Style(AppStyles.siteStyleSheet)
 
         Surface(SmoothColorStyle.toModifier().fillMaxHeight()) {
             content()
