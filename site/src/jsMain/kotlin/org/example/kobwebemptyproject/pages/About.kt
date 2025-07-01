@@ -8,7 +8,7 @@ import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.kobwebemptyproject.sections.Header
 import org.jetbrains.compose.web.dom.Div
-import org.jetbrains.compose.web.dom.H5
+import org.jetbrains.compose.web.dom.H3
 import org.jetbrains.compose.web.dom.Text
 
 @Page
@@ -19,8 +19,8 @@ fun AboutPage(ctx: PageContext) {
         id("container")
     }) {
         Header()
-        H5 {
-            Text("About Page Title")
+        H3 {
+            Text("About Us")
         }
     }
 }

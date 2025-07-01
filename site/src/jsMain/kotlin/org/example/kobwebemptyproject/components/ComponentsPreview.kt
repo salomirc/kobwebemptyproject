@@ -1,22 +1,29 @@
 package org.example.kobwebemptyproject.components
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.example.kobwebemptyproject.sections.Header
+import org.example.kobwebemptyproject.toSitePalette
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 
 @Page("/preview")
 @Composable
 fun ComponentsPreview() {
+    Header()
     Div(attrs = {
         style {
             display(DisplayStyle.Flex)
             flexWrap(FlexWrap.Wrap)
+            alignItems(AlignItems.Center)
             padding(10.px)
         }
     }) {
@@ -31,12 +38,12 @@ fun PreviewWrapper(
     vararg padding: CSSNumeric,
     content: @Composable () -> Unit
 ) {
+    val sitePalette = ColorMode.current.toSitePalette()
     Div(attrs = {
         style {
-            backgroundColor(Color.lightgray)
-            width(120.px)
-            height(120.px)
-            padding(*padding)
+            backgroundColor(sitePalette.overlayTransparent)
+//            padding(*padding)
+            padding(10.px)
             margin(10.px)
         }
     }) {
@@ -47,10 +54,10 @@ fun PreviewWrapper(
 @Composable
 fun NumberBoxPreview() {
     PreviewWrapper(
-        padding = arrayOf(10.px, 0.px, 0.px, 0.px)
+        padding = arrayOf(10.px, 0.px)
     ) {
         NumberBox(
-            "1"
+            text = "1"
         )
     }
 }
@@ -58,50 +65,33 @@ fun NumberBoxPreview() {
 @Composable
 fun RegularButtonPreview() {
     PreviewWrapper(
-        padding = arrayOf(35.px, 0.px, 0.px, 10.px)
+        padding = arrayOf(36.px, 10.px)
     ) {
-        var isDarkMode by remember { mutableStateOf(false) }
         RegularButton(
-            properties = if (isDarkMode) {
-                RegularButtonProperties(
-                    text = "LightMode",
-                    color = Color.white,
-                    backgroundColor = Color.dodgerblue
-                )
-            } else {
-                RegularButtonProperties(
-                    text = "DarkMode",
-                    color = Color.black,
-                    backgroundColor = Color.dodgerblue
-                )
-            },
-            onClick = {
-                isDarkMode = !isDarkMode
-            }
+            text = "Click me!",
+            onClick = {}
         )
     }
 }
 
 @Composable
 fun IconButtonPreview() {
-    var isDarkMode by remember { mutableStateOf(false) }
+    var colorMode by ColorMode.currentState
     PreviewWrapper(
-        padding = arrayOf(35.px, 0.px, 0.px, 10.px)
+        padding = arrayOf(30.px, 10.px)
     ) {
         IconButton(
-            onClick = {
-                isDarkMode = !isDarkMode
-            },
             backgroundColor = Color.dodgerblue,
+            onClick = {},
             content = {
-                if (isDarkMode) {
-                    MoonIcon(modifier = Modifier
-                        .color(Color.white)
+                if (colorMode.isLight) {
+                    SunIcon(modifier = Modifier
+                        .color(Color.black)
                         .padding(top = 8.px)
                     )
                 } else {
-                    SunIcon(modifier = Modifier
-                        .color(Color.black)
+                    MoonIcon(modifier = Modifier
+                        .color(Color.white)
                         .padding(top = 8.px)
                     )
                 }

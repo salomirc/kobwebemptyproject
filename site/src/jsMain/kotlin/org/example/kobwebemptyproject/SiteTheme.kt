@@ -14,10 +14,13 @@ import org.jetbrains.compose.web.css.CSSColorValue
  *   but just a little.
  */
 data class SitePalette(
+    val siteColor: CSSColorValue,
+    val siteColorInverse: CSSColorValue,
     val nearBackground: CSSColorValue,
     val cobweb: CSSColorValue,
     val brand: Brand,
-    val surfaceVariant: CSSColorValue
+    val surfaceVariant: CSSColorValue,
+    val overlayTransparent: CSSColorValue,
 ) {
     data class Brand(
         val primary: CSSColorValue,
@@ -27,22 +30,28 @@ data class SitePalette(
 
 object SitePalettes {
     val light = SitePalette(
+        siteColor = Colors.Black,
+        siteColorInverse = Colors.White,
         nearBackground = Color.rgb(0xF4F6FA),
         cobweb = Colors.LightGray,
         brand = SitePalette.Brand(
             primary = Color.rgb(0x0B2143),
             accent = Color.rgb(0xFCBA03),
         ),
-        surfaceVariant = Colors.LightBlue
+        surfaceVariant = Colors.LightBlue,
+        overlayTransparent = Color.rgba(0, 0, 0, 0.1f)
     )
     val dark = SitePalette(
+        siteColor = Colors.White,
+        siteColorInverse = Colors.Black,
         nearBackground = Color.rgb(0x13171F),
         cobweb = Colors.LightGray.inverted(),
         brand = SitePalette.Brand(
             primary = Color.rgb(0x3C83EF),
             accent = Color.rgb(0xF3DB5B),
         ),
-        surfaceVariant = Colors.DarkSlateBlue
+        surfaceVariant = Colors.DarkSlateBlue,
+        overlayTransparent = Color.rgba(255, 255, 255, 0.1f)
     )
 }
 
