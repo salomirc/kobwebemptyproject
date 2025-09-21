@@ -1,4 +1,4 @@
-package org.example.kobwebemptyproject.components.widgets
+package org.example.kobwebemptyproject.pages
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -7,24 +7,27 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.kobwebemptyproject.components.sections.Header
+import org.example.kobwebemptyproject.components.widgets.IconButton
+import org.example.kobwebemptyproject.components.widgets.NumberBox
+import org.example.kobwebemptyproject.components.widgets.RegularButton
 import org.example.kobwebemptyproject.toSitePalette
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 
 @Page("/preview")
 @Composable
+@Layout(".components.layouts.PageMainLayout")
 fun ComponentsPreview() {
-    Header()
     Div(attrs = {
+        id("pageContainer")
         style {
             display(DisplayStyle.Flex)
             flexWrap(FlexWrap.Wrap)
             alignItems(AlignItems.Center)
-            padding(10.px)
         }
     }) {
         NumberBoxPreview()
@@ -85,14 +88,16 @@ fun IconButtonPreview() {
             onClick = {},
             content = {
                 if (colorMode.isLight) {
-                    SunIcon(modifier = Modifier
-                        .color(Color.black)
-                        .padding(top = 8.px)
+                    SunIcon(
+                        modifier = Modifier
+                            .color(Color.black)
+                            .padding(top = 8.px)
                     )
                 } else {
-                    MoonIcon(modifier = Modifier
-                        .color(Color.white)
-                        .padding(top = 8.px)
+                    MoonIcon(
+                        modifier = Modifier
+                            .color(Color.white)
+                            .padding(top = 8.px)
                     )
                 }
             }

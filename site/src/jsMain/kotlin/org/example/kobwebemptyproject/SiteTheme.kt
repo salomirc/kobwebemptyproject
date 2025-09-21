@@ -35,7 +35,7 @@ object SitePalettes {
         nearBackground = Color.rgb(0xF4F6FA),
         cobweb = Colors.LightGray,
         brand = SitePalette.Brand(
-            primary = Color.rgb(0x0B2143),
+            primary = Color.rgb(0x3C83EF),
             accent = Color.rgb(0xFCBA03),
         ),
         surfaceVariant = Colors.LightBlue,

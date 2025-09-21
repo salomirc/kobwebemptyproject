@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
@@ -16,16 +16,15 @@ import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 
 @Composable
-fun Header() {
+fun NavHeader(ctx: PageContext) {
     var colorMode by ColorMode.currentState
-    val ctx = rememberPageContext()
 
     Div(attrs = {
         id("header")
         style {
             backgroundColor(colorMode.toSitePalette().nearBackground)
             width(100.percent)
-            padding(10.px)
+            padding(4.px)
             textAlign("right")
         }
     }) {
