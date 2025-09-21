@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.kobwebemptyproject.sections.Header
+import org.example.kobwebemptyproject.components.sections.Header
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H3
 import org.jetbrains.compose.web.dom.Text

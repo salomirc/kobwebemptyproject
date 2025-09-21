@@ -1,4 +1,4 @@
-package org.example.kobwebemptyproject.components
+package org.example.kobwebemptyproject.components.widgets
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.VerticalAlign

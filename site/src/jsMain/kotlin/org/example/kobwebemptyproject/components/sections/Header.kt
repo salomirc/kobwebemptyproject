@@ -1,4 +1,4 @@
-package org.example.kobwebemptyproject.sections
+package org.example.kobwebemptyproject.components.sections
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,8 +9,8 @@ import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.kobwebemptyproject.components.IconButton
-import org.example.kobwebemptyproject.components.RegularButton
+import org.example.kobwebemptyproject.components.widgets.IconButton
+import org.example.kobwebemptyproject.components.widgets.RegularButton
 import org.example.kobwebemptyproject.toSitePalette
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div

@@ -1,4 +1,4 @@
-package org.example.kobwebemptyproject.components
+package org.example.kobwebemptyproject.components.widgets
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,7 +10,7 @@ import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.kobwebemptyproject.sections.Header
+import org.example.kobwebemptyproject.components.sections.Header
 import org.example.kobwebemptyproject.toSitePalette
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
