@@ -3,6 +3,8 @@ package org.example.kobwebemptyproject.components.sections
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.VerticalAlign
+import com.varabyte.kobweb.compose.css.verticalAlign
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.core.PageContext
@@ -26,6 +28,7 @@ fun NavHeader(ctx: PageContext) {
             width(100.percent)
             padding(4.px)
             textAlign("right")
+            verticalAlign(VerticalAlign.Top)
         }
     }) {
         RegularButton(

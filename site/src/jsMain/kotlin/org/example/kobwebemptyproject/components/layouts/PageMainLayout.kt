@@ -27,12 +27,5 @@ fun PageMainLayout(content: @Composable () -> Unit) {
             height(4.px)
         }
     })
-    Div(attrs = {
-        id("contentContainer")
-        style {
-            padding(10.px)
-        }
-    }) {
-        content()
-    }
+    content()
 }

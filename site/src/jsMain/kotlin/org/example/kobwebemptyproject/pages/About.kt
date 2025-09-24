@@ -19,7 +19,11 @@ import org.jetbrains.compose.web.dom.Text
 @Layout(".components.layouts.PageMainLayout")
 fun AboutPage(ctx: PageContext) {
     var colorMode by ColorMode.currentState
-    H3 {
+    H3(attrs = {
+        style {
+            paddingLeft(10.px)
+        }
+    }) {
         Text("About Us")
     }
     Div(attrs = {
@@ -28,15 +32,17 @@ fun AboutPage(ctx: PageContext) {
             display(DisplayStyle.Flex)
             justifyContent(JustifyContent.Center)
             alignItems(AlignItems.Center)
+            height(50.vh)
+            paddingBottom(20.px)
         }
     }) {
         Img(
             src = BasePath.prependTo("/images/androidify_me.png"),
             attrs = {
                 style {
-                    minWidth(250.px)
-                    width(25.percent)
-                    borderRadius(20.px)
+                    maxHeight(100.percent)
+                    maxWidth(80.percent)
+                    borderRadius(10.percent)
                 }
             }
         )
