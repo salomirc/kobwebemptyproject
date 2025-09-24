@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.core.layout.Layout
+import com.varabyte.kobweb.navigation.BasePath
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
@@ -30,7 +31,7 @@ fun AboutPage(ctx: PageContext) {
         }
     }) {
         Img(
-            src = "/kobwebemptyproject/images/androidify_me.png",
+            src = BasePath.prependTo("/images/androidify_me.png"),
             attrs = {
                 style {
                     minWidth(250.px)
