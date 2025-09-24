@@ -25,7 +25,7 @@ import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import org.jetbrains.compose.web.css.Style
-import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.vh
 
 private const val COLOR_MODE_KEY = "kobwebdemoproject:colorMode"
 
@@ -58,7 +58,7 @@ fun AppEntry(content: @Composable () -> Unit) {
         Surface(
             modifier = FastColorStyle
                 .toModifier()
-                .minHeight(100.percent)
+                .minHeight(100.vh)
                 .scrollBehavior(ScrollBehavior.Smooth)
         ) {
             content()
