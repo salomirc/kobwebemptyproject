@@ -49,6 +49,12 @@ fun NavHeader(ctx: PageContext) {
                 ctx.router.navigateTo("/preview")
             }
         )
+        RegularButton(
+            text = "CustomBackendDemo",
+            onClick = {
+                ctx.router.navigateTo("/custom-backend-demo")
+            }
+        )
         IconButton(
             onClick = {
                 colorMode = colorMode.opposite
