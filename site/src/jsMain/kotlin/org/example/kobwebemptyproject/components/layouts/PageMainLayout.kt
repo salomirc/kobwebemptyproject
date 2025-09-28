@@ -9,7 +9,9 @@ import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.kobwebemptyproject.components.sections.NavHeader
 import org.example.kobwebemptyproject.toSitePalette
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.backgroundColor
+import org.jetbrains.compose.web.css.height
+import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
 @Layout
@@ -23,7 +25,6 @@ fun PageMainLayout(content: @Composable () -> Unit) {
         id("underHeaderDecoration")
         style {
             backgroundColor(colorMode.toSitePalette().brand.primary)
-            width(100.percent)
             height(4.px)
         }
     })

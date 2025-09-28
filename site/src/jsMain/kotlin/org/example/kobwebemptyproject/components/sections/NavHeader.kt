@@ -3,10 +3,15 @@ package org.example.kobwebemptyproject.components.sections
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.VerticalAlign
-import com.varabyte.kobweb.compose.css.verticalAlign
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
+import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
+import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
@@ -14,23 +19,23 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.kobwebemptyproject.components.widgets.IconButton
 import org.example.kobwebemptyproject.components.widgets.RegularButton
 import org.example.kobwebemptyproject.toSitePalette
-import org.jetbrains.compose.web.css.*
-import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.px
 
 @Composable
 fun NavHeader(ctx: PageContext) {
     var colorMode by ColorMode.currentState
 
-    Div(attrs = {
-        id("header")
-        style {
-            backgroundColor(colorMode.toSitePalette().nearBackground)
-            width(100.percent)
-            padding(4.px)
-            textAlign("right")
-            verticalAlign(VerticalAlign.Top)
-        }
-    }) {
+    Row(
+        modifier = Modifier
+            .id("header")
+            .backgroundColor(colorMode.toSitePalette().nearBackground)
+            .width(100.percent)
+            .padding(all = 4.px),
+        horizontalArrangement = Arrangement.End,
+        verticalAlignment = Alignment.CenterVertically
+    ){
         RegularButton(
             text = "Home",
             onClick = {
@@ -55,6 +60,7 @@ fun NavHeader(ctx: PageContext) {
                 ctx.router.navigateTo("/custom-backend-demo")
             }
         )
+        Box(modifier = Modifier.width(20.px))
         IconButton(
             onClick = {
                 colorMode = colorMode.opposite

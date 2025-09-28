@@ -5,12 +5,13 @@ import androidx.compose.runtime.LaunchedEffect
 import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.css.Transition
+import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
-import com.varabyte.kobweb.compose.ui.modifiers.minHeight
-import com.varabyte.kobweb.compose.ui.modifiers.scrollBehavior
-import com.varabyte.kobweb.compose.ui.modifiers.transition
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.App
+import com.varabyte.kobweb.core.init.InitKobweb
+import com.varabyte.kobweb.core.init.InitKobwebContext
 import com.varabyte.kobweb.silk.SilkApp
 import com.varabyte.kobweb.silk.components.layout.Surface
 import com.varabyte.kobweb.silk.init.InitSilk
@@ -24,8 +25,9 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
-import org.jetbrains.compose.web.css.Style
-import org.jetbrains.compose.web.css.vh
+import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.Span
+import org.jetbrains.compose.web.dom.Text
 
 private const val COLOR_MODE_KEY = "kobwebdemoproject:colorMode"
 
@@ -41,6 +43,28 @@ fun initStyles(ctx: InitSilkContext) {
         registerStyleBase("body") { Modifier.scrollBehavior(ScrollBehavior.Smooth) }
     }
 }
+
+@InitKobweb
+fun setCustomErrorPage(ctx: InitKobwebContext) {
+    ctx.router.setErrorPage {
+        Box(
+            modifier = Modifier
+                .width(100.percent)
+                .height(50.vh),
+            contentAlignment = Alignment.Center
+        ) {
+            Span(attrs = {
+                style {
+                    fontSize(18.px)
+                    fontWeight("bold")
+                }
+            }) {
+                Text("\"404 – We couldn’t find that page. Double-check the URL or return home.\"")
+            }
+        }
+    }
+}
+
 
 @App
 @Composable
@@ -58,6 +82,7 @@ fun AppEntry(content: @Composable () -> Unit) {
         Surface(
             modifier = FastColorStyle
                 .toModifier()
+                .width(100.percent)
                 .minHeight(100.vh)
                 .scrollBehavior(ScrollBehavior.Smooth)
         ) {
