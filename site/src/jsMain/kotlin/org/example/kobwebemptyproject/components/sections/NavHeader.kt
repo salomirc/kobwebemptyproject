@@ -26,12 +26,14 @@ import org.jetbrains.compose.web.css.px
 @Composable
 fun NavHeader(ctx: PageContext) {
     var colorMode by ColorMode.currentState
-    val navItems = listOf(
-        NavItem(title = "Home", target = "/"),
-        NavItem(title = "About", target = "/about"),
-        NavItem(title = "Preview", target = "/preview"),
-        NavItem(title = "CustomBackendDemo", target = "/custom-backend-demo"),
-    )
+    val navItems = remember {
+        listOf(
+            NavItem(title = "Home", target = "/"),
+            NavItem(title = "About", target = "/about"),
+            NavItem(title = "Preview", target = "/preview"),
+            NavItem(title = "CustomBackendDemo", target = "/custom-backend-demo"),
+        )
+    }
     var selectedButton by remember {
         console.log("ctx.route.path = ${ctx.route.path}")
         val navItem: NavItem? = navItems.find { BasePath.prependTo(it.target) == ctx.route.path }
