@@ -72,6 +72,7 @@ fun RegularButtonPreview() {
     ) {
         RegularButton(
             text = "Click me!",
+            isSelected = false,
             onClick = {}
         )
     }

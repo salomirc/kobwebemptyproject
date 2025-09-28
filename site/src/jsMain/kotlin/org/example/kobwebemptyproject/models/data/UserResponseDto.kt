@@ -1,6 +1,7 @@
-package org.example.kobwebemptyproject.models
+package org.example.kobwebemptyproject.models.data
 
 import kotlinx.serialization.Serializable
+import org.example.kobwebemptyproject.models.domain.UserModel
 
 @Serializable
 data class UserResponseDto(

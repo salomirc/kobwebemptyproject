@@ -6,8 +6,8 @@ import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
 import kotlinx.browser.window
 import kotlinx.serialization.json.Json
-import org.example.kobwebemptyproject.models.UserModel
-import org.example.kobwebemptyproject.models.UserResponseDto
+import org.example.kobwebemptyproject.models.data.UserResponseDto
+import org.example.kobwebemptyproject.models.domain.UserModel
 import org.jetbrains.compose.web.css.fontWeight
 import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.css.px

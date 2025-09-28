@@ -1,4 +1,4 @@
-package org.example.kobwebemptyproject.models
+package org.example.kobwebemptyproject.models.domain
 
 data class UserModel(
     val address: Address,

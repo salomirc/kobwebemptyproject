@@ -1,5 +1,6 @@
 package org.example.kobwebemptyproject
 
+import com.varabyte.kobweb.compose.css.borderColor
 import com.varabyte.kobweb.compose.css.transitionDuration
 import org.jetbrains.compose.web.css.*
 
@@ -29,6 +30,14 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
         self + hover style { // self is a selector for `container`
             backgroundColor(Color.dodgerblue)
             color(sitePalette.siteColorInverse)
+        }
+    }
+
+    val regularButtonClassSelected by style {
+        borderColor(Color.orange)
+        // hover selector for a class
+        self + hover style { // self is a selector for `container`
+            backgroundColor(Color.orange)
         }
     }
 }
