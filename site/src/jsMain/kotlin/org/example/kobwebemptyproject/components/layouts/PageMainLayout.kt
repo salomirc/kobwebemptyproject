@@ -2,6 +2,7 @@ package org.example.kobwebemptyproject.components.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.core.layout.Layout
@@ -20,6 +21,7 @@ fun AppContainerLayoutScope.PageMainLayout(
     content: @Composable AppContainerLayoutScope.() -> Unit
 ) {
     var colorMode by ColorMode.currentState
+    val mainViewModel = remember { this.provideMainViewModel() }
 
     NavHeader(ctx)
     Div(attrs = {
