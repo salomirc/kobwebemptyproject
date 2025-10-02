@@ -3,7 +3,7 @@ package org.example.kobwebemptyproject.pages
 import androidx.compose.runtime.*
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
-import org.example.kobwebemptyproject.di.AppContainerLayoutScope
+import org.example.kobwebemptyproject.components.layouts.AppContainerLayoutScope
 import org.example.kobwebemptyproject.models.domain.UserModel
 import org.jetbrains.compose.web.css.fontWeight
 import org.jetbrains.compose.web.css.padding

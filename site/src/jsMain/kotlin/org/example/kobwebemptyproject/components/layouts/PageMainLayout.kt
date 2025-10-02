@@ -7,7 +7,6 @@ import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.kobwebemptyproject.components.sections.NavHeader
-import org.example.kobwebemptyproject.di.AppContainerLayoutScope
 import org.example.kobwebemptyproject.toSitePalette
 import org.jetbrains.compose.web.css.backgroundColor
 import org.jetbrains.compose.web.css.height
