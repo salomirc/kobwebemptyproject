@@ -10,10 +10,6 @@ import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.*
 
-private const val BASE_URL: String = "https://jsonplaceholder.typicode.com"
-
-fun String.toEndpointUrl() = "$BASE_URL$this"
-
 @Page
 @Composable
 @Layout(".components.layouts.PageMainLayout")

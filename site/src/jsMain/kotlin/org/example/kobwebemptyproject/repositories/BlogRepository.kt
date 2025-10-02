@@ -3,9 +3,9 @@ package org.example.kobwebemptyproject.repositories
 import com.varabyte.kobweb.browser.http.http
 import kotlinx.browser.window
 import kotlinx.serialization.json.Json
+import org.example.kobwebemptyproject.helpers.toEndpointUrl
 import org.example.kobwebemptyproject.models.data.UserResponseDto
 import org.example.kobwebemptyproject.models.domain.UserModel
-import org.example.kobwebemptyproject.pages.toEndpointUrl
 
 class BlogRepository {
 
