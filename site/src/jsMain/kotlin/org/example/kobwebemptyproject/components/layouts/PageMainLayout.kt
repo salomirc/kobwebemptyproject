@@ -7,15 +7,19 @@ import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.kobwebemptyproject.components.sections.NavHeader
+import org.example.kobwebemptyproject.di.AppContainerLayoutScope
 import org.example.kobwebemptyproject.toSitePalette
 import org.jetbrains.compose.web.css.backgroundColor
 import org.jetbrains.compose.web.css.height
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
-@Layout
+@Layout(".components.layouts.AppContainerLayout")
 @Composable
-fun PageMainLayout(ctx: PageContext, content: @Composable () -> Unit) {
+fun AppContainerLayoutScope.PageMainLayout(
+    ctx: PageContext,
+    content: @Composable AppContainerLayoutScope.() -> Unit
+) {
     var colorMode by ColorMode.currentState
 
     NavHeader(ctx)
@@ -26,5 +30,5 @@ fun PageMainLayout(ctx: PageContext, content: @Composable () -> Unit) {
             height(4.px)
         }
     })
-    content()
+    this.content()
 }

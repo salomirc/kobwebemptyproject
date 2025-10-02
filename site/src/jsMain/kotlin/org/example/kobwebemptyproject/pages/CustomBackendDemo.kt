@@ -1,12 +1,9 @@
 package org.example.kobwebemptyproject.pages
 
 import androidx.compose.runtime.*
-import com.varabyte.kobweb.browser.http.http
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.layout.Layout
-import kotlinx.browser.window
-import kotlinx.serialization.json.Json
-import org.example.kobwebemptyproject.models.data.UserResponseDto
+import org.example.kobwebemptyproject.di.AppContainerLayoutScope
 import org.example.kobwebemptyproject.models.domain.UserModel
 import org.jetbrains.compose.web.css.fontWeight
 import org.jetbrains.compose.web.css.padding
@@ -20,21 +17,14 @@ fun String.toEndpointUrl() = "$BASE_URL$this"
 @Page
 @Composable
 @Layout(".components.layouts.PageMainLayout")
-fun CustomBackendDemoPage() {
+fun AppContainerLayoutScope.CustomBackendDemoPage() {
     var users by remember { mutableStateOf<List<UserModel>?>(null) }
     var error by remember { mutableStateOf<String?>(null) }
 
+    val viewModel = remember { this.provideCustomBackendDemoViewModel() }
+
     LaunchedEffect(Unit) {
-        try {
-            //trigger deserialization error
-            //val response = window.http.get(resource = "/posts".toEndpointUrl()).decodeToString()
-            val response = window.http.get(resource = "/users".toEndpointUrl()).decodeToString()
-            val usersList = Json.decodeFromString<List<UserResponseDto>>(response)
-            users = usersList.map { it.toDomainModel() }
-        } catch (e: Exception) {
-            console.error("Failed to fetch users", e)
-            error = "Could not load users. Please try again later."
-        }
+        viewModel.getUsers()?.let { users = it } ?: run { error = "Failed to fetch users" }
     }
 
     Div(attrs = {
@@ -53,6 +43,9 @@ fun CustomBackendDemoPage() {
         } ?: Text("Loading users...")
         error?.let { errorMsg -> Div { Text(errorMsg) } }
     }
+
+    H5 { Text("Random number: ${viewModel.randomNUmber}")}
+    H5 { Text("Random number: ${viewModel.randomNUmber}")}
 }
 
 @Composable
