@@ -26,6 +26,8 @@ import org.jetbrains.compose.web.css.px
 @Composable
 fun NavHeader(ctx: PageContext) {
     var colorMode by ColorMode.currentState
+    val currentPath = ctx.route.path
+
     val navItems = remember {
         listOf(
             NavItem(title = "Home", target = "/"),
@@ -34,10 +36,12 @@ fun NavHeader(ctx: PageContext) {
             NavItem(title = "CustomBackendDemo", target = "/custom-backend-demo"),
         )
     }
-    var selectedButton by remember {
-        console.log("ctx.route.path = ${ctx.route.path}")
-        val navItem: NavItem? = navItems.find { BasePath.prependTo(it.target) == ctx.route.path }
-        mutableStateOf(navItem ?: navItems[0])
+
+    var selectedButton by remember { mutableStateOf(navItems[0]) }
+
+    LaunchedEffect(currentPath) {
+        console.log("ctx.route.path = $currentPath")
+        navItems.find { BasePath.prependTo(it.target) == currentPath }?.let { selectedButton = it }
     }
 
     Row(
