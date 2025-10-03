@@ -1,10 +1,11 @@
 package org.example.kobwebemptyproject.repositories
 
-import com.varabyte.kobweb.browser.http.http
+import com.varabyte.kobweb.browser.http.HttpMethod
 import kotlinx.browser.window
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.json.Json
 import org.example.kobwebemptyproject.components.api_caller.IWebApiCaller
+import org.example.kobwebemptyproject.components.api_caller.fetchResponse
 import org.example.kobwebemptyproject.helpers.toEndpointUrl
 import org.example.kobwebemptyproject.models.data.UserResponseDto
 import org.example.kobwebemptyproject.models.domain.UserModel
@@ -20,11 +21,19 @@ class BlogRepository(
 
     override suspend fun getUsers(): Flow<ActiveResponseState<List<UserModel>>> {
         return DataSourcePattern.singlePattern {
-            apiCaller.invoke {
-                window.http.get(resource = "/users".toEndpointUrl())
+//            apiCaller.invoke {
+////                window.fetchResponse(HttpMethod.GET, resource = "/usersss".toEndpointUrl())
+//                window.fetchResponse(HttpMethod.GET, resource = "/users".toEndpointUrl())
+//            }
+            apiCaller.raw {
+//                window.fetchResponse(HttpMethod.GET, resource = "/usersss".toEndpointUrl())
+                window.fetchResponse(HttpMethod.GET, resource = "/users".toEndpointUrl())
             }
-                .mapCatching { bytes ->
-                    Json.decodeFromString<List<UserResponseDto>>(bytes.decodeToString())
+                .mapCatching { apiSuccess ->
+                    console.log("ApiCallerLog: API response: $apiSuccess")
+                    console.log("ApiCallerLog: API response HTTP Code: ${apiSuccess.code}")
+                    console.log("ApiCallerLog: API response Header \"Content-Type\", \"${apiSuccess.headers.get("Content-Type")}\"")
+                    Json.decodeFromString<List<UserResponseDto>>(apiSuccess.body)
                 }
                 .mapCatching { userResponseDtos ->
                     userResponseDtos.map(Mapper::mapToDomainUser)

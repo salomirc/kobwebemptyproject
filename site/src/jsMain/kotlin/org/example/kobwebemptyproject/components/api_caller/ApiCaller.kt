@@ -2,85 +2,113 @@ package org.example.kobwebemptyproject.components.api_caller
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.w3c.fetch.Response
 
-/**
- * An interface for making API calls for services returning a Retrofit [Response].
- * It is used to abstract away the implementation of the API call and to wrap the call in order to provide unified
- * (or even centralized, if desired) error handling.
- */
+
 interface IWebApiCaller {
 
-    /**
-     * Converts a [T] to [Result] containing the body of type [T].
-     */
-    suspend fun <T : Any> invoke(
-        callBlock: suspend () -> T
-    ): Result<T>
+    suspend fun invoke(
+        callBlock: suspend () -> Response
+    ): Result<String>
 
-    /**
-     * Converts a [Unit] to [Result] containing the body of type [Unit].
-     */
     suspend fun invokeUnit(
-        callBlock: suspend () -> Unit
+        callBlock: suspend () -> Response
     ): Result<Unit>
 
-    /**
-     * Converts a [T] nullable to [Result] containing the body of type [T] nullable.
-     */
-    suspend fun <T> invokeNullable(
-        callBlock: suspend () -> T?
-    ): Result<T?>
+    suspend fun invokeNullable(
+        callBlock: suspend () -> Response
+    ): Result<String?>
+
+    suspend fun raw(
+        callBlock: suspend () -> Response
+    ): Result<ApiSuccess<String>>
+
+    suspend fun rawUnit(
+        callBlock: suspend () -> Response
+    ): Result<ApiSuccess<Unit>>
+
+    suspend fun rawNullable(
+        callBlock: suspend () -> Response
+    ): Result<ApiSuccess<String?>>
 }
 
-/**
- * Creates an [WebApiCaller] that can be used to make calls for API services.
- * All exceptions are caught and propagated to [Result].
- */
+
 class WebApiCaller() : IWebApiCaller {
+    override suspend fun invoke(callBlock: suspend () -> Response): Result<String> =
+        raw(callBlock).mapCatching { it.body }
 
-    override suspend fun <T : Any> invoke(callBlock: suspend () -> T): Result<T> {
+    override suspend fun invokeUnit(callBlock: suspend () -> Response): Result<Unit> =
+        rawUnit(callBlock).mapCatching { it.body }
+
+    override suspend fun invokeNullable(callBlock: suspend () -> Response): Result<String?> =
+        rawNullable(callBlock).mapCatching { it.body }
+
+    override suspend fun raw(callBlock: suspend () -> Response): Result<ApiSuccess<String>>{
         return networkCallHandling(
             callBlock = callBlock,
-            handleResponseBody = { it ?: throw NoResponseBodyException(NOT_NULL_BODY_EXPECTED_MESSAGE) }
+            handleResponseBody = { bytes ->
+                if (bytes.isEmpty()) {
+                    throw EmptyByteArrayResponseBodyException(NOT_NULL_BODY_EXPECTED_MESSAGE)
+                } else {
+                    bytes.decodeToString()
+                }
+            }
         )
     }
 
-    override suspend fun invokeUnit(callBlock: suspend () -> Unit): Result<Unit> {
+    override suspend fun rawUnit(callBlock: suspend () -> Response): Result<ApiSuccess<Unit>> {
         return networkCallHandling(
             callBlock = callBlock,
-            handleResponseBody = { it ?: Unit }
+            // Equivalent to { bytes -> Unit }
+            handleResponseBody = { _ -> }
         )
     }
 
-    override suspend fun <T> invokeNullable(callBlock: suspend () -> T?): Result<T?> {
+    override suspend fun rawNullable(callBlock: suspend () -> Response): Result<ApiSuccess<String?>> {
         return networkCallHandling(
             callBlock = callBlock,
-            handleResponseBody = { it }
+            handleResponseBody = {
+                if (it.isEmpty()) {
+                    null
+                } else {
+                    it.decodeToString()
+                }
+            }
         )
     }
 
     private suspend fun <T> networkCallHandling(
-        callBlock: suspend () -> T,
-        handleResponseBody: (data: T?) -> T
-    ): Result<T> {
+        callBlock: suspend () -> Response,
+        handleResponseBody: (data: ByteArray) -> T
+    ): Result<ApiSuccess<T>> {
         return runCatching {
-            val response = withContext(Dispatchers.Default) {
+            val response =  withContext(Dispatchers.Default) {
                 callBlock()
             }
-            handleResponseBody(response)
+            if (response.ok) {
+                ApiSuccess(
+                    code = response.status,
+                    message = response.statusText,
+                    headers = response.headers,
+                    body = handleResponseBody(response.localGetBodyBytes()),
+                    rawResponse = response
+                )
+            } else {
+                throw ApiException(
+                    code = response.status,
+                    errorBodyString = response.localGetBodyBytes().decodeToString(),
+                    response = response,
+                    bodyBytes = response.localGetBodyBytes()
+                )
+            }
         }.onFailure { t ->
             console.error("ApiCallerLog: Exception on API call:", t)
         }
     }
 
     companion object {
-        const val NOT_NULL_BODY_EXPECTED_MESSAGE = "Not null body response was expected!"
+        const val NOT_NULL_BODY_EXPECTED_MESSAGE = "Not null or empty body response was expected!"
     }
 }
 
-/**
- * Exception thrown when the API call returns an empty response body, but a body is expected.
- *
- * @param message exception message
- */
-class NoResponseBodyException(message: String) : RuntimeException(message)
+class EmptyByteArrayResponseBodyException(message: String) : RuntimeException(message)

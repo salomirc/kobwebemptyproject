@@ -52,7 +52,7 @@ fun CustomBackendDemo(
                 }
             }
             is Failure -> {
-                Div { Text("Error: ${responseState.throwable.message}") }
+                Div { Text("Failed to fetch users") }
             }
             else -> {
                 Text("Loading users...")
