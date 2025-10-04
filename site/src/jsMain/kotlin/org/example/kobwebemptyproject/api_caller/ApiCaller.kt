@@ -1,4 +1,4 @@
-package org.example.kobwebemptyproject.components.api_caller
+package org.example.kobwebemptyproject.api_caller
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -87,7 +87,7 @@ class WebApiCaller() : IWebApiCaller {
             }
             if (response.ok) {
                 ApiSuccess(
-                    code = response.status,
+                    code = response.status.toInt(),
                     message = response.statusText,
                     headers = response.headers,
                     body = handleResponseBody(response.localGetBodyBytes()),
@@ -95,7 +95,7 @@ class WebApiCaller() : IWebApiCaller {
                 )
             } else {
                 throw ApiException(
-                    code = response.status,
+                    code = response.status.toInt(),
                     errorBodyString = response.localGetBodyBytes().decodeToString(),
                     response = response,
                     bodyBytes = response.localGetBodyBytes()

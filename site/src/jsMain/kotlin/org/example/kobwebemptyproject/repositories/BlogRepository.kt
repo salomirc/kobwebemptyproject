@@ -4,8 +4,8 @@ import com.varabyte.kobweb.browser.http.HttpMethod
 import kotlinx.browser.window
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.json.Json
-import org.example.kobwebemptyproject.components.api_caller.IWebApiCaller
-import org.example.kobwebemptyproject.components.api_caller.fetchResponse
+import org.example.kobwebemptyproject.api_caller.IWebApiCaller
+import org.example.kobwebemptyproject.api_caller.fetchResponse
 import org.example.kobwebemptyproject.helpers.toEndpointUrl
 import org.example.kobwebemptyproject.models.data.UserResponseDto
 import org.example.kobwebemptyproject.models.domain.UserModel
@@ -26,8 +26,8 @@ class BlogRepository(
 //                window.fetchResponse(HttpMethod.GET, resource = "/users".toEndpointUrl())
 //            }
             apiCaller.raw {
-//                window.fetchResponse(HttpMethod.GET, resource = "/usersss".toEndpointUrl())
-                window.fetchResponse(HttpMethod.GET, resource = "/users".toEndpointUrl())
+                window.fetchResponse(HttpMethod.GET, resource = "/usersss".toEndpointUrl())
+//                window.fetchResponse(HttpMethod.GET, resource = "/users".toEndpointUrl())
             }
                 .mapCatching { apiSuccess ->
                     console.log("ApiCallerLog: API response: $apiSuccess")

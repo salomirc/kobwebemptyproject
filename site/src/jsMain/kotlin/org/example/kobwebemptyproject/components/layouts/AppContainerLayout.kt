@@ -3,9 +3,11 @@ package org.example.kobwebemptyproject.components.layouts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.varabyte.kobweb.core.layout.Layout
-import org.example.kobwebemptyproject.components.api_caller.WebApiCaller
-import org.example.kobwebemptyproject.components.use_cases.GetUsersUseCase
+import org.example.kobwebemptyproject.api_caller.WebApiCaller
+import org.example.kobwebemptyproject.error_handling.ErrorHandler
+import org.example.kobwebemptyproject.error_handling.ErrorHandlerBroadcastService
 import org.example.kobwebemptyproject.repositories.BlogRepository
+import org.example.kobwebemptyproject.use_cases.GetUsersUseCase
 import org.example.kobwebemptyproject.view_models.CustomBackendDemoViewModel
 import org.example.kobwebemptyproject.view_models.MainViewModel
 
@@ -30,11 +32,14 @@ class AppContainerLayoutScope {
                 repository = BlogRepository(
                     apiCaller = apiCaller
                 )
+            ),
+            errorHandler = ErrorHandler(
+                viewModelName = CustomBackendDemoViewModel.TAG
             )
         )
     }
 
     fun provideMainViewModel(): MainViewModel {
-        return MainViewModel()
+        return MainViewModel(broadcastService = ErrorHandlerBroadcastService)
     }
 }

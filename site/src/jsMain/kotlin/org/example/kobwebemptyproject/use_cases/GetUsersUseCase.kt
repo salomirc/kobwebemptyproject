@@ -1,4 +1,4 @@
-package org.example.kobwebemptyproject.components.use_cases
+package org.example.kobwebemptyproject.use_cases
 
 
 import kotlinx.coroutines.Dispatchers

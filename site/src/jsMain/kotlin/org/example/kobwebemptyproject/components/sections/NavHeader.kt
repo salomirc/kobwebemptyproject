@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.core.PageContext
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.navigation.BasePath
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
@@ -24,7 +25,8 @@ import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 @Composable
-fun NavHeader(ctx: PageContext) {
+fun NavHeader() {
+    val ctx: PageContext = rememberPageContext()
     var colorMode by ColorMode.currentState
     val currentPath = ctx.route.path
 

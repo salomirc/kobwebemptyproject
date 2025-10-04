@@ -1,14 +1,16 @@
 package org.example.kobwebemptyproject.view_models
 
 import kotlinx.coroutines.delay
-import org.example.kobwebemptyproject.components.use_cases.IGetUsersUseCase
+import org.example.kobwebemptyproject.error_handling.ErrorHandler
 import org.example.kobwebemptyproject.models.domain.UserModel
 import org.example.kobwebemptyproject.repositories.ResponseState
 import org.example.kobwebemptyproject.repositories.ResponseState.ActiveResponseState.*
 import org.example.kobwebemptyproject.repositories.ResponseState.Idle
+import org.example.kobwebemptyproject.use_cases.IGetUsersUseCase
 
 class CustomBackendDemoViewModel(
-    private val getUsersUseCase: IGetUsersUseCase
+    private val getUsersUseCase: IGetUsersUseCase,
+    private val errorHandler: ErrorHandler
 ): BaseViewModel<CustomBackendDemoViewModel.Model, CustomBackendDemoViewModel.Event>(
     model = Model(
         isLoading = true,
@@ -56,6 +58,20 @@ class CustomBackendDemoViewModel(
                                 isLoading = false,
                                 userModelsResponseState = state
                             )
+                        }
+//                        //Default error handling
+//                        errorHandler.handleError(state.throwable)
+
+                        //Custom Error Handler
+                        errorHandler.apply {
+                            defaultErrorHandler(
+                                onApiException = defaultApiExceptionHandler(
+                                    on4xx = {
+                                        broadcastService.setErrorMessage("404 resource not found!")
+                                    }
+
+                                )
+                            ).invoke(state.throwable)
                         }
                     }
                     is Success -> {

@@ -1,4 +1,4 @@
-package org.example.kobwebemptyproject.components.api_caller
+package org.example.kobwebemptyproject.api_caller
 
 import com.varabyte.kobweb.browser.http.FetchDefaults
 import com.varabyte.kobweb.browser.http.HttpMethod
@@ -9,6 +9,7 @@ import org.w3c.dom.Window
 import org.w3c.fetch.RequestInit
 import org.w3c.fetch.RequestRedirect
 import org.w3c.fetch.Response
+import kotlin.collections.iterator
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.js.json

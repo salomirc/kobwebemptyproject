@@ -52,7 +52,7 @@ fun CustomBackendDemo(
                 }
             }
             is Failure -> {
-                Div { Text("Failed to fetch users") }
+                Text("Failed to fetch users")
             }
             else -> {
                 Text("Loading users...")

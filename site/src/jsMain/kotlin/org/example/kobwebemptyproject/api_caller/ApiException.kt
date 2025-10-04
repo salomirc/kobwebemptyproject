@@ -1,9 +1,9 @@
-package org.example.kobwebemptyproject.components.api_caller
+package org.example.kobwebemptyproject.api_caller
 
 import org.w3c.fetch.Response
 
 class ApiException(
-    val code: Short,
+    val code: Int,
     val errorBodyString: String? = null,
     response: Response,
     bodyBytes: ByteArray?
