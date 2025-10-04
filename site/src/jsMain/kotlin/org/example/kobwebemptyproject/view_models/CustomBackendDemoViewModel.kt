@@ -1,6 +1,7 @@
 package org.example.kobwebemptyproject.view_models
 
 import kotlinx.coroutines.delay
+import org.example.kobwebemptyproject.error_handling.ErrorAction
 import org.example.kobwebemptyproject.error_handling.ErrorHandler
 import org.example.kobwebemptyproject.models.domain.UserModel
 import org.example.kobwebemptyproject.repositories.ResponseState
@@ -67,7 +68,10 @@ class CustomBackendDemoViewModel(
                             defaultErrorHandler(
                                 onApiException = defaultApiExceptionHandler(
                                     on4xx = {
-                                        broadcastService.setErrorMessage("404 resource not found!")
+                                        broadcastService.setErrorMessage(
+                                            message = "404 resource not found!",
+                                            errorAction = ErrorAction.LOG_OUT
+                                        )
                                     }
 
                                 )

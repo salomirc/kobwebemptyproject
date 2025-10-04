@@ -26,8 +26,8 @@ class BlogRepository(
 //                window.fetchResponse(HttpMethod.GET, resource = "/users".toEndpointUrl())
 //            }
             apiCaller.raw {
-                window.fetchResponse(HttpMethod.GET, resource = "/usersss".toEndpointUrl())
-//                window.fetchResponse(HttpMethod.GET, resource = "/users".toEndpointUrl())
+//                window.fetchResponse(HttpMethod.GET, resource = "/usersss".toEndpointUrl())
+                window.fetchResponse(HttpMethod.GET, resource = "/users".toEndpointUrl())
             }
                 .mapCatching { apiSuccess ->
                     console.log("ApiCallerLog: API response: $apiSuccess")

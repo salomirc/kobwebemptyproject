@@ -76,9 +76,11 @@ private fun GlobalActionAndMessageToastSetUp(
     LaunchedEffect(messageResourceIdWrapper) {
         messageResourceIdWrapper?.let { wrapper ->
             console.log("MainLayout toastMessage LaunchedEffect have been called with: $messageResourceIdWrapper")
-            val message = wrapper.message
-            toastMessage = message
-            console.log("MainLayout toastMessage have been set to: $message")
+            wrapper.message?.let { s ->
+                toastMessage = s
+            }
+            console.log("MainLayout toastMessage have been set to: ${wrapper.message}")
+            console.log("MainLayout errorAction have been set to: ${wrapper.errorAction}")
 
             wrapper.errorAction?.let { errorAction ->
                 when (errorAction) {

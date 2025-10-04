@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface IErrorHandlerBroadcastService {
     val messageResourceIdWrapper: StateFlow<MessageResourceIdWrapper?>
-    fun setErrorMessage(message: String, errorAction: ErrorAction? = null)
+    fun setErrorMessage(message: String?, errorAction: ErrorAction? = null)
     fun processNextMessage()
 }
 
@@ -15,7 +15,8 @@ object ErrorHandlerBroadcastService : IErrorHandlerBroadcastService {
     override val messageResourceIdWrapper: StateFlow<MessageResourceIdWrapper?>
         get() = _messageResourceIdWrapper
 
-    override fun setErrorMessage(message: String, errorAction: ErrorAction?) {
+    override fun setErrorMessage(message: String?, errorAction: ErrorAction?) {
+        if (message == null && errorAction == null) return
         queue.addLast(
             MessageResourceIdWrapper(
                 message = message,
@@ -37,7 +38,7 @@ object ErrorHandlerBroadcastService : IErrorHandlerBroadcastService {
 
 // An instance class used to achieve reference comparison of the MutableStateFlow setter new value
 class MessageResourceIdWrapper(
-    val message: String,
+    val message: String? = null,
     val errorAction: ErrorAction? = null
 )
 
