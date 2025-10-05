@@ -71,7 +71,7 @@ jobs:
           cd site
           ../kobweb-${{ env.KOBWEB_CLI_VERSION }}/bin/kobweb export --notty --layout static
           # Remove source code .map references files manually if needed
-          find ./site/.kobweb -name "*.map" -delete || true
+          find ./site/.kobweb/site -name "*.map" -delete || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
