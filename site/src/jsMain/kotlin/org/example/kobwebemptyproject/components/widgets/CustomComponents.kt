@@ -1,8 +1,6 @@
 package org.example.kobwebemptyproject.components.widgets
 
 import androidx.compose.runtime.Composable
-import com.varabyte.kobweb.compose.css.VerticalAlign
-import com.varabyte.kobweb.compose.css.verticalAlign
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.kobwebemptyproject.AppStyles
 import org.example.kobwebemptyproject.toSitePalette
@@ -40,7 +38,7 @@ fun RegularButton(
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    val styles = mutableListOf(AppStyles.siteStyleSheet.regularButtonClass).apply {
+    val styles: MutableList<String> = mutableListOf(AppStyles.siteStyleSheet.regularButtonClass).apply {
         if (isSelected) add(AppStyles.siteStyleSheet.regularButtonClassSelected)
     }
     Button(attrs ={
@@ -56,23 +54,22 @@ fun RegularButton(
 
 @Composable
 fun IconButton(
+    styles: List<String>? = null,
     fontSize: CSSNumeric = 30.px,
     backgroundColor: CSSColorValue,
     onClick: () -> Unit,
     content: @Composable () -> Unit
 ) {
+    val styles: MutableList<String> = mutableListOf(AppStyles.siteStyleSheet.iconButtonClass).apply {
+        styles?.let { this.addAll(it) }
+    }
     Button(attrs ={
         onClick {
             onClick()
         }
+        classes(styles)
         style {
-            borderWidth(0.px)
             backgroundColor(backgroundColor)
-            padding(8.px, 16.px)
-            margin(1.px)
-            verticalAlign(VerticalAlign.Middle)
-            display(DisplayStyle.InlineBlock)
-            cursor("pointer")
         }
     }) {
         Div(attrs = {

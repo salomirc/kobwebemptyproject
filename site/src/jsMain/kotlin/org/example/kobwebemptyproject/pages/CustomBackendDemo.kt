@@ -8,6 +8,7 @@ import org.example.kobwebemptyproject.models.domain.UserModel
 import org.example.kobwebemptyproject.repositories.ResponseState.ActiveResponseState.Failure
 import org.example.kobwebemptyproject.repositories.ResponseState.ActiveResponseState.Success
 import org.example.kobwebemptyproject.view_models.CustomBackendDemoViewModel
+import org.jetbrains.compose.web.css.listStyleType
 import org.jetbrains.compose.web.css.padding
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.*
@@ -38,17 +39,13 @@ fun CustomBackendDemo(
     }) {
         H3 { Text("Custom Backend Demo") }
         Text("The following users were retrieved from the backend: ")
-        when(val responseState = model.userModelsResponseState) {
+        when(model.userModelsResponseState) {
             is Success -> {
                 val users = model.userModelsResponseState.data
                 if (users.isEmpty()) {
                     Text("No users found.")
                 } else {
-                    Ul {
-                        users.forEach { user ->
-                            UserItem(user)
-                        }
-                    }
+                    UsersList(users)
                 }
             }
             is Failure -> {
@@ -62,6 +59,14 @@ fun CustomBackendDemo(
 }
 
 @Composable
-fun UserItem(user: UserModel) {
-    Li { Text("${user.name} (${user.email})") }
+private fun UsersList(users: List<UserModel>) {
+    Ul {
+        users.forEach { user ->
+            Li(attrs = {
+                style {
+                    listStyleType("circle")
+                }
+            }) { Text("${user.name} (${user.email})") }
+        }
+    }
 }
