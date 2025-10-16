@@ -13,7 +13,10 @@ import org.example.kobwebemptyproject.error_handling.ErrorAction
 import org.example.kobwebemptyproject.error_handling.MessageResourceIdWrapper
 import org.example.kobwebemptyproject.toSitePalette
 import org.example.kobwebemptyproject.view_models.MainViewModel
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.backgroundColor
+import org.jetbrains.compose.web.css.padding
+import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.textAlign
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
@@ -50,13 +53,6 @@ fun AppContainerLayoutScope.MainLayout(
     }
 
     NavHeader()
-    Div(attrs = {
-        id("underHeaderDecoration")
-        style {
-            backgroundColor(colorMode.toSitePalette().brand.primary)
-            height(4.px)
-        }
-    })
     GlobalActionAndMessageToastSetUp(
         colorMode = colorMode,
         messageResourceIdWrapper = model.messageResourceIdWrapper,

@@ -1,6 +1,7 @@
 package org.example.kobwebemptyproject.components.sections
 
 import androidx.compose.runtime.*
+import com.varabyte.kobweb.compose.css.borderBottom
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.padding
@@ -50,6 +51,11 @@ fun NavHeader() {
         classes(AppStyles.siteStyleSheet.navBarContainer)
         style {
             backgroundColor(colorMode.toSitePalette().nearBackground)
+            borderBottom {
+                width = 4.px
+                style = LineStyle.Solid
+                color = colorMode.toSitePalette().brand.primary
+            }
         }
     }) {
         navItems.forEach { navItem ->
