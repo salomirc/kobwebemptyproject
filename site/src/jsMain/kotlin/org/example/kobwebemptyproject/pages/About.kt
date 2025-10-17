@@ -8,7 +8,9 @@ import com.varabyte.kobweb.core.PageContext
 import com.varabyte.kobweb.core.layout.Layout
 import com.varabyte.kobweb.navigation.BasePath
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.jetbrains.compose.web.css.*
+import org.example.kobwebemptyproject.AppStyles
+import org.jetbrains.compose.web.css.paddingLeft
+import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H3
 import org.jetbrains.compose.web.dom.Img
@@ -28,22 +30,12 @@ fun AboutPage(ctx: PageContext) {
     }
     Div(attrs = {
         id("imageContainer")
-        style {
-            display(DisplayStyle.Flex)
-            justifyContent(JustifyContent.Center)
-            alignItems(AlignItems.Center)
-            height(50.vh)
-            paddingBottom(20.px)
-        }
+        classes(AppStyles.siteStyleSheet.aboutImageContainerClass)
     }) {
         Img(
             src = BasePath.prependTo("/images/androidify_me.png"),
             attrs = {
-                style {
-                    maxHeight(100.percent)
-                    maxWidth(80.percent)
-                    borderRadius(10.percent)
-                }
+                classes(AppStyles.siteStyleSheet.aboutImageClass)
             }
         )
     }

@@ -40,7 +40,29 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
         }
     }
 
-    val mobileMenu by style {
+    val aboutImageContainerClass by style {
+        display(DisplayStyle.Flex)
+        justifyContent(JustifyContent.Center)
+        alignItems(AlignItems.Center)
+        paddingBottom(20.px)
+
+        // media query
+        media(
+            query = screenMaxWidth640pxMediaQuery
+        ) {
+            self style {
+                alignItems(AlignItems.FlexStart)
+            }
+        }
+    }
+
+    val aboutImageClass by style {
+        maxHeight(50.vh)
+        maxWidth(50.percent)
+        borderRadius(10.percent)
+    }
+
+    val mobileMenuClass by style {
         // media query
         media(
             query = screenMinWidth640pxMediaQuery
@@ -84,14 +106,6 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
             backgroundColor(Color.dodgerblue)
             color(sitePalette.siteColorInverse)
         }
-        // media query
-        media(
-            query = screenMaxWidth640pxMediaQuery
-        ) {
-            self style {
-                display(DisplayStyle.None)
-            }
-        }
     }
 
     val regularButtonClassSelected by style {
@@ -99,6 +113,17 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
         // hover selector for a class
         self + hover style { // self is a selector for `container`
             backgroundColor(Color.orange)
+        }
+    }
+
+    val displayNoneMax640pxMediaQuery by style {
+        // media query
+        media(
+            query = screenMaxWidth640pxMediaQuery
+        ) {
+            self style {
+                display(DisplayStyle.None)
+            }
         }
     }
 

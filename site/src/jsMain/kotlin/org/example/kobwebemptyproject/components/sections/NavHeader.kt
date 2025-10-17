@@ -60,6 +60,7 @@ fun NavHeader() {
     }) {
         navItems.forEach { navItem ->
             RegularButton(
+                styles = listOf(AppStyles.siteStyleSheet.displayNoneMax640pxMediaQuery),
                 text = navItem.title,
                 isSelected = selectedButton == navItem,
                 onClick = {
@@ -109,7 +110,7 @@ fun NavHeader() {
     Div(attrs = {
         classes(
             if (isMobileMenu) {
-                AppStyles.siteStyleSheet.mobileMenu
+                AppStyles.siteStyleSheet.mobileMenuClass
             } else {
                 AppStyles.siteStyleSheet.displayNone
             }

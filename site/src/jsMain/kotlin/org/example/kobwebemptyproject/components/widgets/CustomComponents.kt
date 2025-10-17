@@ -34,11 +34,13 @@ fun NumberBox(
 
 @Composable
 fun RegularButton(
+    styles: List<String>? = null,
     text: String,
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
     val styles: MutableList<String> = mutableListOf(AppStyles.siteStyleSheet.regularButtonClass).apply {
+        styles?.let { addAll(it) }
         if (isSelected) add(AppStyles.siteStyleSheet.regularButtonClassSelected)
     }
     Button(attrs ={
