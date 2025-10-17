@@ -28,8 +28,16 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
         }
     }
 
-    val displayNone by style {
+    val barsMenuClass by style {
         display(DisplayStyle.None)
+        // media query
+        media(
+            query = screenMaxWidth640pxMediaQuery
+        ) {
+            self style {
+                display(DisplayStyle.Block)
+            }
+        }
     }
 
     val mobileMenu by style {
@@ -46,18 +54,6 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
     val mobileMenuLink by style {
         textDecoration("none")
         textTransform(TextTransform.Uppercase)
-    }
-
-    val barsMenuClass by style {
-        display(DisplayStyle.None)
-        // media query
-        media(
-            query = screenMaxWidth640pxMediaQuery
-        ) {
-            self style {
-                display(DisplayStyle.Block)
-            }
-        }
     }
 
     val iconButtonClass by style {
@@ -106,13 +102,18 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
         }
     }
 
+    val displayNone by style {
+        display(DisplayStyle.None)
+    }
+
     companion object {
-        val <TBuilder> GenericStyleSheetBuilder<TBuilder>.screenMinWidth640pxMediaQuery: CSSMediaQuery
-            get() = CSSMediaQuery.MediaType(CSSMediaQuery.MediaType.Enum.Screen)
-                .and(mediaMinWidth(450.px))
         val <TBuilder> GenericStyleSheetBuilder<TBuilder>.screenMaxWidth640pxMediaQuery: CSSMediaQuery
             get() = CSSMediaQuery.MediaType(CSSMediaQuery.MediaType.Enum.Screen)
                 .and(mediaMaxWidth(449.px))
+
+        val <TBuilder> GenericStyleSheetBuilder<TBuilder>.screenMinWidth640pxMediaQuery: CSSMediaQuery
+            get() = CSSMediaQuery.MediaType(CSSMediaQuery.MediaType.Enum.Screen)
+                .and(mediaMinWidth(450.px))
     }
 }
 
