@@ -1,8 +1,5 @@
 package org.example.kobwebemptyproject
 
-import com.varabyte.kobweb.compose.css.TextTransform
-import com.varabyte.kobweb.compose.css.borderColor
-import com.varabyte.kobweb.compose.css.textTransform
 import com.varabyte.kobweb.compose.css.transitionDuration
 import org.jetbrains.compose.web.css.*
 
@@ -75,7 +72,7 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
 
     val mobileMenuLink by style {
         textDecoration("none")
-        textTransform(TextTransform.Uppercase)
+        fontFamily("Arial")
     }
 
     val iconButtonClass by style {
@@ -87,11 +84,7 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
 
     val regularButtonClass by style {
         backgroundColor(Color.transparent)
-        border(
-            width = 2.px,
-            style = LineStyle.Solid,
-            color = Color.dodgerblue
-        )
+        borderWidth(0.px)
         borderRadius(12.px)
         padding(8.px)
         textAlign("center")
@@ -103,17 +96,14 @@ class SiteStyleSheet(val sitePalette: SitePalette) : StyleSheet() {
 
         // hover selector for a class
         self + hover style { // self is a selector for `container`
-            backgroundColor(Color.dodgerblue)
+            backgroundColor(sitePalette.brand.primary)
             color(sitePalette.siteColorInverse)
         }
     }
 
     val regularButtonClassSelected by style {
-        borderColor(Color.orange)
-        // hover selector for a class
-        self + hover style { // self is a selector for `container`
-            backgroundColor(Color.orange)
-        }
+        color(sitePalette.siteColorInverse)
+        backgroundColor(sitePalette.brand.primary)
     }
 
     val displayNoneMax640pxMediaQuery by style {
